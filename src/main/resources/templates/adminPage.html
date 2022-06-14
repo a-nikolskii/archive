@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous" />
+</head>
+<body>
+<div class="container-fluid text-center">
+    <form th:action="@{/admin/register}" th:object="${archiveUserRegisterDto}" method="post" style="max-width: 350px; margin: 0 auto;">
+
+        <div th:if="${param.error}">
+            <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+        </div>
+
+        <div th:if="${param.logout}">
+            <p class="text-warning">You have been logged out.</p>
+        </div>
+
+        <div class="border border-secondary p-3 rounded">
+            <p>Admin Panel</p>
+            <p>
+                <input type="text" name="firstName" th:field="*{firstName}" class="form-control" placeholder="First name" required autofocus/>
+            </p>
+            <p>
+                <input type="text" name="lastName" th:field="*{lastName}" class="form-control" placeholder="Last name" required autofocus/>
+            </p>
+            <p>
+                <input type="text" name="userRole" th:field="*{userRole}" class="form-control" placeholder="User role" required autofocus/>
+            </p>
+            <p>
+                <input type="email" name="email" th:field="*{email}" class="form-control" placeholder="E-mail" required autofocus/>
+            </p>
+            <p>
+                <input type="password" name="password" th:field="*{password}" class="form-control" placeholder="Password" required />
+            </p>
+            <p>
+                <input type="password" name="passwordConfirm" th:field="*{passwordConfirm}" class="form-control" placeholder="Password confirm" required />
+            </p>
+            <p>
+                <input type="submit" value="Register New Archive User" class="btn btn-primary"/>
+            </p>
+        </div>
+    </form>
+    <br/>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout" class="btn btn-primary"/>
+    </form>
+    <script th:if="${successRegister}">
+        alert("User successfully register")
+    </script>
+</div>
+</body>
+</html>

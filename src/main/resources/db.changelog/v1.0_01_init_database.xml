@@ -1,0 +1,121 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="create-roles-table" author="a.nikolskii">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="roles"/>
+            </not>
+        </preConditions>
+        <createTable tableName="roles">
+            <column name="role_id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_roles"/>
+            </column>
+            <column name="role_name" type="VARCHAR(64)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-users-table" author="a.nikolskii">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="users"/>
+            </not>
+        </preConditions>
+        <createTable tableName="users">
+            <column name="user_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_users"/>
+            </column>
+            <column name="first_name" type="VARCHAR(64)"/>
+            <column name="last_name" type="VARCHAR(64)"/>
+            <column name="email" type="VARCHAR(64)"/>
+            <column name="password" type="VARCHAR(64)"/>
+            <column name="role_id" type="INT"/>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="role_id"
+                                 baseTableName="users"
+                                 constraintName="fk_user_roles"
+                                 referencedColumnNames="role_id"
+                                 referencedTableName="roles"/>
+    </changeSet>
+
+    <changeSet id="create-authorities-table" author="a.nikolskii">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="authorities"/>
+            </not>
+        </preConditions>
+        <createTable tableName="authorities">
+            <column name="authority_id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_authorities"/>
+            </column>
+            <column name="authority_name" type="VARCHAR(64)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-role_authorities-table" author="a.nikolskii">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="role_authorities"/>
+                <foreignKeyConstraintExists foreignKeyName="fk_role_authorities_roles"/>
+                <foreignKeyConstraintExists foreignKeyName="fk_role_authorities_authorities"/>
+                <primaryKeyExists primaryKeyName="pk_role_authorities"/>
+
+            </not>
+        </preConditions>
+        <createTable tableName="role_authorities">
+            <column name="role_id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="pk_role_authorities"/>
+            </column>
+            <column name="authority_id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="pk_role_authorities"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="role_id"
+                                 baseTableName="role_authorities"
+                                 constraintName="fk_role_authorities_roles"
+                                 referencedColumnNames="role_id"
+                                 referencedTableName="roles"/>
+        <addForeignKeyConstraint baseColumnNames="authority_id"
+                                 baseTableName="role_authorities"
+                                 constraintName="fk_role_authorities_authorities"
+                                 referencedColumnNames="authority_id"
+                                 referencedTableName="authorities"/>
+    </changeSet>
+
+    <changeSet id="create-archive-document-table" author="a.nikolskii">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="archive_document"/>
+            </not>
+        </preConditions>
+        <createTable tableName="archive_document">
+            <column name = "document_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_archive_document"/>
+            </column>
+            <column name="document_date" type="DATE"/>
+            <column name="document_title" type="VARCHAR(255)"/>
+            <column name="document_author" type="VARCHAR(255)"/>
+            <column name="document_content" type="TEXT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-user_id_sequence" author="a.nikolskii">
+        <createSequence sequenceName="user_id_sequence" startValue="10"/>
+    </changeSet>
+
+    <changeSet id="create-role_id_sequence" author="a.nikolskii" >
+        <createSequence sequenceName="role_id_sequence"  startValue="10"/>
+    </changeSet>
+
+    <changeSet id="create-authority_id_sequence" author="a.nikolskii">
+        <createSequence sequenceName="authority_id_sequence"  startValue="10"/>
+    </changeSet>
+
+    <changeSet id="create-document_id_sequence" author="a.nikolskii">
+        <createSequence sequenceName="document_id_sequence"  startValue="1000"/>
+    </changeSet>
+
+</databaseChangeLog>

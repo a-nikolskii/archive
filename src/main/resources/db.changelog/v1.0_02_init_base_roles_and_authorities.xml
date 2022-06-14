@@ -1,0 +1,58 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    
+    <changeSet id="init_base_roles" author="a.nikolskii">
+        <insert tableName="roles">
+            <column name="role_name" value="ROLE_ADMIN"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="role_name" value="ROLE_USER"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="role_name" value="ROLE_ARCHIVIST"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="init_base_authorities" author="a.nikolskii">
+        <insert tableName="authorities">
+            <column name="authority_name" value="USER_REGISTER"/>
+        </insert>
+        <insert tableName="authorities">
+            <column name="authority_name" value="DOCUMENT_EDIT"/>
+        </insert>
+        <insert tableName="authorities">
+            <column name="authority_name" value="DOCUMENT_CREATE"/>
+        </insert>
+        <insert tableName="authorities">
+            <column name="authority_name" value="DOCUMENT_VIEW"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="init_base_role_authorities" author="a.nikolskii">
+        <insert tableName="role_authorities">
+            <column name="role_id" value="1"/>
+            <column name="authority_id" value="1"/>
+        </insert>
+        <insert tableName="role_authorities">
+            <column name="role_id" value="2"/>
+            <column name="authority_id" value="4"/>
+        </insert>
+        <insert tableName="role_authorities">
+            <column name="role_id" value="3"/>
+            <column name="authority_id" value="2"/>
+        </insert>
+        <insert tableName="role_authorities">
+            <column name="role_id" value="3"/>
+            <column name="authority_id" value="3"/>
+        </insert>
+        <insert tableName="role_authorities">
+            <column name="role_id" value="3"/>
+            <column name="authority_id" value="4"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

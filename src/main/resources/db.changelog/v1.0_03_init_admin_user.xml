@@ -1,0 +1,18 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="init_admin_user" author="a.nikolskii">
+        <insert tableName="users">
+            <column name="user_id" value="1"/>
+            <column name="first_name" value="archive_admin"/>
+            <column name="last_name" value="archive_admin"/>
+            <column name="email" value="admin@archive.com"/>
+            <column name="password" value="$2a$12$VyXHLAP1VghY9l4ZB0ItauCb5Ys6hLpVnaAVW2b8BiJXhcRnXA5vS"/>
+            <column name="role_id" value="1"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

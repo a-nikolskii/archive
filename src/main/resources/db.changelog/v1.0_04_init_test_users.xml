@@ -1,0 +1,29 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="init_test_archivist_user" author="a.nikolskii">
+        <insert tableName="users">
+            <column name="user_id" value="2"/>
+            <column name="first_name" value="archive_test_archivist"/>
+            <column name="last_name" value="archive_test_archivist"/>
+            <column name="email" value="test_archivist@archive.com"/>
+            <column name="password" value="$2a$12$VyXHLAP1VghY9l4ZB0ItauCb5Ys6hLpVnaAVW2b8BiJXhcRnXA5vS"/>
+            <column name="role_id" value="3"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="init_test_user_user" author="a.nikolskii">
+        <insert tableName="users">
+            <column name="user_id" value="3"/>
+            <column name="first_name" value="archive_test_user"/>
+            <column name="last_name" value="archive_test_user"/>
+            <column name="email" value="test_user@archive.com"/>
+            <column name="password" value="$2a$12$VyXHLAP1VghY9l4ZB0ItauCb5Ys6hLpVnaAVW2b8BiJXhcRnXA5vS"/>
+            <column name="role_id" value="2"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

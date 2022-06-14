@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Archive Document Manager</title>
+</head>
+<body>
+<div align="center">
+    <div>
+        <form th:action="@{/logout}" method="post" align="right">
+            <input type="submit" value="Logout" />
+        </form>
+        <h1>Archive Document List</h1>
+        <a th:if="${isArchivist}" href="/document/create">Create New Archive Document</a>
+    </div>
+    <br/><br/>
+    <div>
+        <form th:action="@{/}">
+            Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+            &nbsp;
+            <input type="submit" value="Search" />
+            &nbsp;
+            <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+        </form>
+    </div>
+    <br/>
+    <div>
+        <table border="1" cellpadding="10">
+            <thead>
+            <tr>
+                <th>Document id</th>
+                <th>Document date</th>
+                <th>Document title</th>
+                <th>Document author</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="archiveDocument : ${listArchiveDocument}">
+                <td th:text="${archiveDocument.documentId}">Document id</td>
+                <td th:text="${archiveDocument.documentDate}">Document date</td>
+                <td th:text="${archiveDocument.documentTitle}">Document title</td>
+                <td th:text="${archiveDocument.documentAuthor}">Document author</td>
+                <td>
+                    <a th:href="@{'/document/view/' + ${archiveDocument.documentId}}">View</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:if="${isArchivist}" th:href="@{'/document/edit/' + ${archiveDocument.documentId}}">Edit</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:if="${isArchivist}" th:href="@{'/document/delete/' + ${archiveDocument.documentId}}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br/>
+    <div>
+        Total Items: [[${totalItems}]]
+        &nbsp;
+        <a th:if="${currentPage > 1}" th:href="@{'/document/page/1'}">First</a>
+        <span th:unless="${currentPage > 1}">First</span>
+        &nbsp;
+        <a th:if="${currentPage > 1}" th:href="@{'/document/page/' + ${currentPage - 1}}">Previous</a>
+        <span th:unless="${currentPage > 1}">Previous</span>
+        &nbsp;
+        <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                <a th:if="${currentPage != i}" th:href="@{'/document/page/' + ${i}}">[[${i}]]</a>
+                <span th:unless="${currentPage != i}">[[${i}]]</span>
+                &nbsp;
+            </span>
+        <a th:if="${currentPage < totalPages}" th:href="@{'/document/page/' + ${currentPage + 1}}">Next</a>
+        <span th:unless="${currentPage < totalPages}">Next</span>
+        &nbsp;
+        <a th:if="${currentPage < totalPages}" th:href="@{'/document/page/' + ${totalPages}}">Last</a>
+        <span th:unless="${currentPage < totalPages}">Last</span>
+    </div>
+</div>
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/}]]";
+    }
+</script>
+</body>

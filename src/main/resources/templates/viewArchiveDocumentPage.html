@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Create New Archive Document</title>
+</head>
+<body>
+<div align="center">
+    <div>
+        <form th:action="@{/logout}" method="post" align="right">
+            <input type="submit" value="Logout" />
+        </form>
+    <h1>Archive Document</h1>
+    <div th:object="${archiveDocument}">
+        <table border="0" cellpadding="10">
+            <tr>
+                <td>Document title: </td>
+                <td th:text="${archiveDocument.getDocumentTitle()}"></td>
+            </tr>
+            <tr>
+                <td>Document date: </td>
+                <td th:text="${archiveDocument.getDocumentDate()}"></td>
+            </tr>
+            <tr>
+                <td>Document author: </td>
+                <td th:text="${archiveDocument.getDocumentAuthor()}"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td th:text="${archiveDocument.getDocumentContent()}"></td>
+            </tr>
+        </table>
+    </div>
+    <br />
+</div>
+</body>
+</html>

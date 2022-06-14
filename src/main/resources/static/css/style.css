@@ -1,0 +1,73 @@
+.login-page-wrapp {
+  height: 100vh;
+}
+
+.login-form-wrap {
+  width: 50%;
+}
+
+.login-form-wrap .form-card {
+  max-width: 500px;
+  width: 100%;
+  margin-right: 30px;
+}
+
+.login-form-wrap .form-card .card-title {
+  color: var(--gray);
+}
+
+.login-greeting-screen{
+  background: var(--teal);
+  width: 50%;
+  padding: 20px;
+}
+
+.login-greeting-screen .login-greeting-screen-text {
+  max-width: 500px;
+}
+
+.login-greeting-screen .login-greeting-screen-text {
+  color: var(--white);
+}
+
+.login-greeting-screen .login-greeting-screen-title {
+  margin-bottom: 30px;
+  text-transform: capitalize;
+}
+
+.login-greeting-screen .login-greeting-screen-description {
+  line-height: 1.4;
+}
+
+.create-account {
+  ;
+}
+
+/*News page*/
+.news-container .card-title {
+  background: rgba(0, 0, 0, 0.7);
+}
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  z-index: 1;
+}
+
+.news-container .grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: dense;
+}
+
+body.acces-denied-page{
+  background-color: #20c997;
+  color: white;
+}
+
+
+/*nav {*/
+/*  background-color: #20c997;*/
+/*}*/
